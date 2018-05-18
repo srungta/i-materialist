@@ -5,6 +5,7 @@ import json
 
 from six.moves.urllib.request import urlretrieve
 from pprint import pprint
+import pandas as pd
 
 DATA_FOLDER = './materialist/data'
 TEST_FOLDER = './materialist/data/test'
@@ -16,42 +17,41 @@ TRAIN_FILE = './materialist/data/train.json'
 VALIDATION_FILE = './materialist/data/validation.json'
 
 
+TEST_PICKLE = './materialist/data/test.pickle'
+TRAIN_PICKLE = './materialist/data/train.pickle'
+VALIDATION_PICKLE = './materialist/data/validation.pickle'
+
+
 def create_folder(FOLDER):
     os.makedirs(FOLDER)
 
 
-def get_images(JSONFILENAME, FOLDER):
+def create_pickle(JSONFILENAME, OUTPUTFILENAME, has_labels=False):
     with open(JSONFILENAME) as data_file:
         data = json.load(data_file)
     images = data['images']
+    dataset = {}
     for image in images:
-        url = image['url']
-        filename = str(image['imageId']) + '.jpg'
-        filename = os.path.join(FOLDER, filename)
-        if os.path.isfile(filename) == False:
-            try:
-                f, _ = urlretrieve(url, filename)
-                print('Downloaded : ', filename)
-            except:
-                print('Error downloading : ', filename)
-        else:
-            print('Found : ', filename)
+        imageId = image['imageId']
+        dataset[imageId] = image
+    if has_labels:
+        annotations = data['annotations']
+        for annotation in annotations:
+            imageId = annotation['imageId']
+            dataset[imageId]['labelId'] = list(annotation['labelId'])
+    a = list(dataset.values())
+    panda = pd.DataFrame(a)
+    print(panda.head())
+    panda.to_pickle(OUTPUTFILENAME)
+
 
 def main():
-    print('Downloading test images')
-    if os.path.isdir(TEST_FOLDER) == False:
-        create_folder(TEST_FOLDER)
-    get_images(TEST_FILE, TEST_FOLDER)
-
-    print('Downloading train images')
-    if os.path.isdir(TRAIN_FOLDER) == False:
-        create_folder(TRAIN_FOLDER)
-    get_images(TRAIN_FILE, TRAIN_FOLDER)
-
-    print('Downloading validation images')
-    if os.path.isdir(VALIDATION_FOLDER) == False:
-        create_folder(VALIDATION_FOLDER)
-    get_images(VALIDATION_FILE, VALIDATION_FOLDER)
+    if os.path.isfile(TEST_PICKLE) == False:
+        create_pickle(TEST_FILE, TEST_PICKLE, False)
+    if os.path.isfile(VALIDATION_PICKLE) == False:
+        create_pickle(VALIDATION_FILE, VALIDATION_PICKLE, True)
+    if os.path.isfile(TRAIN_PICKLE) == False:
+        create_pickle(TRAIN_FILE, TRAIN_PICKLE, True)
 
 
 if __name__ == '__main__':
