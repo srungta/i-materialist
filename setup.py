@@ -3,8 +3,6 @@
 import os
 import json
 
-from six.moves.urllib.request import urlretrieve
-from pprint import pprint
 import pandas as pd
 
 from materialist.commonconstants import *
