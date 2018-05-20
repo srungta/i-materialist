@@ -6,14 +6,7 @@ import json
 from six.moves.urllib.request import urlretrieve
 from pprint import pprint
 
-DATA_FOLDER = './materialist/data'
-TEST_FOLDER = './materialist/data/test'
-TRAIN_FOLDER = './materialist/data/train'
-VALIDATION_FOLDER = './materialist/data/validation'
-
-TEST_FILE = './materialist/data/test.json'
-TRAIN_FILE = './materialist/data/train.json'
-VALIDATION_FILE = './materialist/data/validation.json'
+from materialist.commonconstants import *
 
 
 def create_folder(FOLDER):
