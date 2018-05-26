@@ -1,15 +1,18 @@
-from commonconstants import RESULTS_FOLDER, FINAL_RESULT
 import os
 from os import listdir
 from os.path import isfile, join
 import csv
 
-individual_result_files = [f for f in listdir(
-    RESULTS_FOLDER) if isfile(join(RESULTS_FOLDER, f))]
+'''
+Takes individual result files and generates the combined submission file.
+'''
 
+RESULTS_FOLDER = ''
+FINAL_RESULT = ''
 final_results = {}
 
-imageId = 1
+individual_result_files = [f for f in listdir(
+    RESULTS_FOLDER) if isfile(join(RESULTS_FOLDER, f))]
 
 for result_file in individual_result_files:
     filename = RESULTS_FOLDER + result_file
