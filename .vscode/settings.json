@@ -1,3 +1,7 @@
 {
-    "python.pythonPath": "C:\\Users\\shrung\\AppData\\Local\\Continuum\\miniconda3\\envs\\deeplearning\\python.exe"
+    "python.pythonPath": "C:\\Users\\shrung\\AppData\\Local\\Continuum\\miniconda3\\envs\\deeplearning\\python.exe",
+    "terminal.integrated.shellArgs.windows": [
+        "/K", 
+        "C:\\Users\\shrung\\AppData\\Local\\Continuum\\miniconda3\\Scripts\\activate.bat C:\\Users\\shrung\\AppData\\Local\\Continuum\\miniconda3"
+    ]
 }
