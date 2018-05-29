@@ -2,12 +2,25 @@
 
 import os
 import json
-
-from six.moves.urllib.request import urlretrieve
-from pprint import pprint
 import pandas as pd
-
 from materialist.commonconstants import *
+
+
+'''
+This script generates the pickles in the following format :
+
+train pickle :
+ImageId1, Url1
+ImageId2, Url2
+...
+
+train label pickle :
+ImageId1, LabelId1
+ImageId1, LabelId2
+ImageId2, LabelId1
+...
+
+'''
 
 def create_folder(FOLDER):
     os.makedirs(FOLDER)

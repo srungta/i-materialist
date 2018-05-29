@@ -14,3 +14,6 @@ VALIDATION_PICKLE = './materialist/data/validation.pickle'
 
 TRAIN_LABEL_PICKLE = './materialist/data/train_label.pickle'
 VALIDATION_LABEL_PICKLE = './materialist/data/validation_label.pickle'
+
+RESULTS_FOLDER = './materialist/results/test/'
+FINAL_RESULT = './materialist/results/final.csv'
